@@ -3,8 +3,8 @@
  */
 
 var config = {
-    concurrent_requests:5,
-    url_to_scrape:"https://medium.com"
+    max_concurrent_requests:5,
+    url_to_scrape:"https://medium.com/"
 }
 
 module.exports = config;
