@@ -10,6 +10,7 @@ var max_concurrent_requests = config.max_concurrent_requests;
 var concurrent_requests = 0;
 var queue = [];
 var baseUrl = config.url_to_scrape;
+var store = {};
 
 function makeApiCall(url){
     if(url) {
@@ -35,12 +36,13 @@ function makeApiCall(url){
                             else{
                                 invalidUrl = false;
                             }
-                            if (!invalidUrl) {
+                            if (!invalidUrl && !store[url]) {
+                                store[url] = url;
                                 makeApiCall(url);
-                                data += url + ", " + nextUrl + "\n";
+                                console.log(url);
+                                data += url + "\n";
                             }
                         }
-                        //console.log(data);
                         fs.appendFile('urls.csv',data, function (err) {
                             if (err) throw err;
                         });
